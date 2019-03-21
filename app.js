@@ -23,11 +23,7 @@ YOU MAY EDIT THE LINES BELOW
  */
 function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
   if (daysOfWeek.indexOf(currentDay) < daysOfWeek.indexOf("Saturday")) {
-    var daysTillNextClass = daysOfWeek.slice(
-      daysOfWeek.indexOf(currentDay),
-      daysOfWeek.indexOf("Saturday")
-    );
-    return daysTillNextClass.length;
+    return daysOfWeek.slice(daysOfWeek.indexOf(currentDay), daysOfWeek.indexOf("Saturday")).length;
   }
   if (daysOfWeek.indexOf(currentDay) >= daysOfWeek.indexOf("Saturday")) {
     return (
