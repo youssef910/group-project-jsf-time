@@ -22,7 +22,19 @@ YOU MAY EDIT THE LINES BELOW
  * @return {Number}
  */
 function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
-  return -1;
+  if (daysOfWeek.indexOf(currentDay) < daysOfWeek.indexOf("Saturday")) {
+    var daysTillNextClass = daysOfWeek.slice(
+      daysOfWeek.indexOf(currentDay),
+      daysOfWeek.indexOf("Saturday")
+    );
+    return daysTillNextClass.length;
+  }
+  if (daysOfWeek.indexOf(currentDay) >= daysOfWeek.indexOf("Saturday")) {
+    return (
+      daysOfWeek.slice(daysOfWeek.indexOf(currentDay)).length +
+      daysOfWeek.slice(0, daysOfWeek.indexOf("Saturday")).length
+    );
+  }
 }
 
 /**
@@ -42,7 +54,17 @@ function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
  * @return {Number}
  */
 function hoursUntilNextDinner(currentHour, hourOfDinner) {
-  return -1;
+  var remainingHours;
+  if (currentHour < hourOfDinner) {
+    return hoursOfDay.slice(hoursOfDay.indexOf(currentHour), hoursOfDay.indexOf(hourOfDinner))
+      .length;
+  }
+  if (currentHour >= hourOfDinner) {
+    return (
+      hoursOfDay.slice(hoursOfDay.indexOf(0), hoursOfDay.indexOf(hourOfDinner)).length +
+      hoursOfDay.slice(hoursOfDay.indexOf(currentHour)).length
+    );
+  }
 }
 
 /**
@@ -58,7 +80,7 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return [];
+  return [hoursOfDay.slice(0, hoursOfDay.indexOf(currentHour))];
 }
 
 /**
@@ -75,7 +97,6 @@ function hoursPassedToday(currentHour, hoursOfDay) {
  */
 function hoursAheadToday(currentHour, hoursOfDay) {
   return hoursOfDay.slice(hoursOfDay.indexOf(currentHour));
-  return [];
 }
 
 /**
@@ -101,7 +122,10 @@ function hoursAheadToday(currentHour, hoursOfDay) {
  * @return {Number}
  */
 function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
-  return -1;
+  return (
+    hoursAheadToday(currentHour, hoursOfDay).length +
+    numberOfDaysUntilNextClass(currentDay, daysOfWeek) * 24
+  );
 }
 
 /*
