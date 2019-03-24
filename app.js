@@ -21,8 +21,14 @@ YOU MAY EDIT THE LINES BELOW
  * @param {Array<String>} daysOfWeek The array will be: ['Monday', 'Tuesday', Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday]
  * @return {Number}
  */
+
+// var currentDay =  daysOfWeek[new Date().getDay()-1];
 function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
-  return -1;
+  if (currentDay === daysOfWeek[new Date().getDay() - 1]) {
+    return 7;
+  } else {
+    return Math.abs(daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1));
+  }
 }
 
 /**
@@ -100,7 +106,19 @@ function hoursAheadToday(currentHour, hoursOfDay) {
  * @return {Number}
  */
 function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
-  return -1;
+  if (currentHour <= 11 && currentDay === daysOfWeek[new Date().getDay() - 1]) {
+    return 11 - currentHour;
+  } else if (currentHour > 11 && currentDay === daysOfWeek[new Date().getDay() - 1]) {
+    return hoursOfDay.length - currentHour + 6 * hoursOfDay.length + 11;
+  } else if (currentDay !== daysOfWeek[new Date().getDay() - 1]) {
+    return (
+      hoursOfDay.length -
+      currentHour +
+      (Math.abs(daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1) - 1) *
+        hoursOfDay.length +
+        11)
+    );
+  }
 }
 
 /*
