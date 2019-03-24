@@ -92,7 +92,7 @@ function hoursPassedToday(currentHour, hoursOfDay) {
  * @return {Array<Number>}
  */
 function hoursAheadToday(currentHour, hoursOfDay) {
-  return hoursOfDay.slice(hoursOfDay.indexOf(currentHour));
+  return hoursOfDay.slice(hoursOfDay.indexOf(currentHour) + 1);
 }
 
 /**
@@ -120,7 +120,8 @@ function hoursAheadToday(currentHour, hoursOfDay) {
 function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
   return (
     hoursAheadToday(currentHour, hoursOfDay).length +
-    numberOfDaysUntilNextClass(currentDay, daysOfWeek) * 24
+    (numberOfDaysUntilNextClass(currentDay, daysOfWeek) - 1) * 24 +
+    hoursOfDay.slice(hoursOfDay.indexOf(0), hoursOfDay.indexOf(11)).length
   );
 }
 
