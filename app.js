@@ -80,7 +80,7 @@ function hoursPassedToday(currentHour, hoursOfDay) {
  * @return {Array<Number>}
  */
 function hoursAheadToday(currentHour, hoursOfDay) {
-  return [];
+  return [hoursOfDay.slice(hoursOfDay.indexOf(currentHour) + 1)];
 }
 
 /**
