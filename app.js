@@ -48,7 +48,13 @@ function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
  * @return {Number}
  */
 function hoursUntilNextDinner(currentHour, hourOfDinner) {
-  return -1;
+  if (currentHour < hourOfDinner) {
+    return hoursOfDay.slice(0, 19).indexOf(hourOfDinner - currentHour);
+  } else {
+    if (currentHour >= hourOfDinner) {
+      return hoursOfDay.slice(currentHour, 24).length + hoursOfDay.slice(0, hourOfDinner).length;
+    }
+  }
 }
 
 /**
@@ -64,7 +70,7 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.slice(0, currentHour);
 }
 
 /**
