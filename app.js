@@ -51,15 +51,6 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
   }
 }
 
-/*
-function hoursUntilNextDinner(currentHour, hourOfDinner) {
-  var SethourOfDinner = new Date();
-  var hourOfDinner = SethourOfDinner.setHours(19);
-  var currentHour = Date.now();
-
-  return (hourOfDinner - currentHour) / 3600000;
-}
-*/
 /**
  * Write a function that returns an array including all of
  * the hours that have already passed today.
