@@ -42,9 +42,24 @@ function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
  * @return {Number}
  */
 function hoursUntilNextDinner(currentHour, hourOfDinner) {
-  return -1;
+  if (currentHour < hourOfDinner) {
+    return hoursOfDay.slice(0, 19).indexOf(hourOfDinner - currentHour);
+  } else {
+    if (currentHour >= hourOfDinner) {
+      return hoursOfDay.slice(currentHour, 24).length + hoursOfDay.slice(0, hourOfDinner).length;
+    }
+  }
 }
 
+/*
+function hoursUntilNextDinner(currentHour, hourOfDinner) {
+  var SethourOfDinner = new Date();
+  var hourOfDinner = SethourOfDinner.setHours(19);
+  var currentHour = Date.now();
+
+  return (hourOfDinner - currentHour) / 3600000;
+}
+*/
 /**
  * Write a function that returns an array including all of
  * the hours that have already passed today.
@@ -58,7 +73,7 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.slice(0, currentHour);
 }
 
 /**
