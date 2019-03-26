@@ -22,12 +22,13 @@ YOU MAY EDIT THE LINES BELOW
  * @return {Number}
  */
 
-// var currentDay =  daysOfWeek[new Date().getDay()-1];
 function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
-  if (currentDay === daysOfWeek[new Date().getDay() - 1]) {
+  if (currentDay === "Saturday" && currentHour < 11) {
+    return 0;
+  } else if (currentDay === "Saturday" && currentHour >= 11) {
     return 7;
   } else {
-    return Math.abs(daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1));
+    return daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1);
   }
 }
 
@@ -106,11 +107,11 @@ function hoursAheadToday(currentHour, hoursOfDay) {
  * @return {Number}
  */
 function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
-  if (currentHour <= 11 && currentDay === daysOfWeek[new Date().getDay() - 1]) {
+  if (currentHour <= 11 && currentDay === "Saturday") {
     return 11 - currentHour;
-  } else if (currentHour > 11 && currentDay === daysOfWeek[new Date().getDay() - 1]) {
+  } else if (currentHour > 11 && currentDay === "Saturday") {
     return hoursOfDay.length - currentHour + 6 * hoursOfDay.length + 11;
-  } else if (currentDay !== daysOfWeek[new Date().getDay() - 1]) {
+  } else if (currentDay !== "Saturday") {
     return (
       hoursOfDay.length -
       currentHour +
