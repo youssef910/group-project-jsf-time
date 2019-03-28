@@ -106,22 +106,41 @@ function hoursAheadToday(currentHour, hoursOfDay) {
  * @param {Array<String>} daysOfWeek The array will be: ['Monday', 'Tuesday', Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday]
  * @return {Number}
  */
+// function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
+//   if (currentHour <= 11 && currentDay === "Saturday") {
+//     return 11 - currentHour;
+//   } else if (currentHour > 11 && currentDay === "Saturday") {
+//     return hoursOfDay.length - currentHour + 6 * hoursOfDay.length + 11;
+//   } else if (currentDay !== "Saturday") {
+//     return (
+//       hoursOfDay.length -
+//       currentHour +
+//       (Math.abs(daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1) - 1) *
+//         hoursOfDay.length +
+//         11)
+//     );
+//   }
+// }
+
 function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
   if (currentHour <= 11 && currentDay === "Saturday") {
-    return 11 - currentHour;
+    return hoursOfDay.slice(0, 11).length - hoursOfDay.slice(0, currentHour).length;
   } else if (currentHour > 11 && currentDay === "Saturday") {
-    return hoursOfDay.length - currentHour + 6 * hoursOfDay.length + 11;
+    return (
+      hoursOfDay.length -
+      hoursOfDay.slice(0, currentHour).length +
+      6 * hoursOfDay.length +
+      hoursOfDay.slice(0, 11).length
+    );
   } else if (currentDay !== "Saturday") {
     return (
       hoursOfDay.length -
-      currentHour +
-      (Math.abs(daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1) - 1) *
-        hoursOfDay.length +
-        11)
+      hoursOfDay.slice(0, currentHour).length +
+      Math.abs(daysOfWeek.indexOf("Saturday") - (now.getDay() - 1) - 1) * hoursOfDay.length +
+      hoursOfDay.slice(0, 11).length
     );
   }
 }
-
 /*
   DO NOT EDIT BELOW THIS LINE
   --------------------------- */
