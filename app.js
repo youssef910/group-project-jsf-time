@@ -50,7 +50,7 @@ function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
  */
 function hoursUntilNextDinner(currentHour, hourOfDinner) {
   if (currentHour < hourOfDinner) {
-    return hoursOfDay.slice(0, 19).indexOf(hourOfDinner - currentHour);
+    return hoursOfDay.slice(currentHour, hourOfDinner).length;
   } else {
     if (currentHour >= hourOfDinner) {
       return hoursOfDay.slice(currentHour, 24).length + hoursOfDay.slice(0, hourOfDinner).length;
